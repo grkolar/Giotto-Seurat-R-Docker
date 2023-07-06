@@ -14,13 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
     && sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list \
     && apt-get update \
     && apt-get -y build-dep r-base-core\
-    && pip3 install pandas python-igraph networkx python-louvain leidenalg scikit-learn smfishHmrf scanpy squidpy \
+    && pip3 install pandas python-igraph networkx python-louvain leidenalg scikit-learn smfishHmrf scanpy squidpy jupyterlab\
     && apt-get install -y glances
 
 RUN Rscript -e "install.packages('remotes')" \
     && installGithub.r RubD/Giotto \
     && rm -rf /tmp/downloaded_packages/
 
-RUN R -e "install.packages('Seurat',dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('future',dependencies=TRUE, repos='http://cran.rstudio.com/')"
-
+RUN R --no-echo --no-restore --no-save -e "install.packages('Seurat',dependencies=TRUE)"
