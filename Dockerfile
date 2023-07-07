@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
     && apt-get update \
     && apt-get -y build-dep r-base-core\
     && pip3 install pandas python-igraph networkx python-louvain leidenalg scikit-learn smfishHmrf scanpy squidpy jupyterlab\
-    && apt-get install -y glances
+    && apt-get install -y glances \
+    && apt-get install -y libglpk-dev
 
 RUN Rscript -e "install.packages('remotes')" \
     && installGithub.r RubD/Giotto \
